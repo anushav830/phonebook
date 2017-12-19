@@ -1,0 +1,87 @@
+
+<div style="text-align: left" class="testimonial" id="<%= phone_contact.id %>">
+     <h3><div style="float: left; width: 8%"><%= phone_contact.Label %>: </div>
+      	<strong class="testing"><%= number_to_phone(phone_contact.Number,{}) %></strong>
+      	   <button type="button" class="phone-link btn btn-link btn-circle" id="<%= phone_contact.Number %>" data-id="<%= phone_contact.id %>" data-dismiss="modal" data-toggle="modal" 
+            data-target="#myModal1<%= phone_contact.id %><%= phone_contact.entry_id %>">   
+              <i id="tooltip3" data-toggle="tooltip" data-placement="right" data-original-title="Delete" class="fa fa-trash-o" style="color: red;font-size: 24px;"></i>
+     </button>
+     </h3>
+ </div>
+
+ <hr>
+
+  
+ <!-- Modal -->
+  <div class="modal fade" id="myModal1<%= phone_contact.id %><%= phone_contact.entry_id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+          <button type="button" class="close btn btn-default btn-circle" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>  
+          </button>                            
+        </div>
+
+        <div class="modal-body" style="background-color: #F0F0F0" id="phoneUserModal">
+          <h4>Do you want to delete <%= number_to_phone(phone_contact.Number,{}) %> ?</h4>
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to 'Delete',entry_phone_contact_path(id: phone_contact.id, entry_id: @entry.id), :method => :delete, class: 'btn btn-outline-danger', remote: true %>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>                  
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <script type="text/javascript">
+
+        jQuery(function($)
+        {
+            $('#tooltip3').each(function() {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+
+           $('.phone-link').on('click', function (e) {
+
+                var id = $(this).attr('id');
+
+                           
+                 var options = {
+                  backdrop: "static", // Disables clicking away to close
+                  keyboard: false, // Disables the escape key
+                  show: true // This shows the modal by default
+                };
+
+
+                 $('#myModal1').modal(options);
+              });
+
+            //  $('#myModal1').on('show.bs.modal', function (event) {
+
+            //         var test = $(this).attr('data-id');
+
+            //         console.log(test);
+                                      
+            //         var content = $(this).siblings('.testimonial').html();
+
+                    
+            //         console.log(content);
+
+            //         $("#phoneUserModal").html('Do you want to delete? ' + content);
+            //         console.log('djgdg');
+            // });
+
+        });
+
+       
+
+
+
+  </script>
+
+

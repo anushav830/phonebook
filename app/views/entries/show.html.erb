@@ -1,0 +1,98 @@
+<nav class="navbar navbar-fixed-top navbar-inverse" style="color: white;">
+    <h1><%= image_tag("phonelogo.png", :alt => "phone", :size => "100x90" ) %> PhoneBook</h1>
+</nav>
+
+<br>
+<br>
+<br>
+
+<div class="container text-center" style="margin-top:50px;">
+
+<div class="card">
+    <h3 class="card-header"><p id="notice" class="flash"><%= notice %></p></h3></div>
+
+<div class="btn-group  pull-left">
+    <%= link_to entries_path, class: "btn btn-info" do  %>
+       <i class="fa fa-home"></i> Home
+    <% end %>
+</div>
+
+
+<div class="card-title text-center">
+  <h1>Contact Detail</h1>
+</div>
+
+
+<div class="btn-toolbar">
+  <div>
+    <%= link_to edit_entry_path(@entry), class: "btn btn-info" do  %>
+       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+<div class="input-group-btn" style="margin-top:10px;" id="foo">
+  <h3 style="text-align: left">Name: <strong><%= @entry.Name %> </strong>  
+    <button type="button" class="static-popup-link btn btn-link btn-circle"
+         data-toggle="modal" data-target="#myModal <%= @entry %>">  
+            <i id="tooltip_del" data-toggle="tooltip" data-placement="right" data-original-title="Delete" class="fa fa-trash-o" style="color: red;font-size: 24px;"></i>
+     </button>
+    </h3>
+</div>
+
+
+
+<div id="phone_contacts" style="margin-top:10px;">
+  <% if @entry.phone_contacts.present? %>
+  <hr>
+    <%= render @entry.phone_contacts %>
+  <% end %>
+</div>
+
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+          <button type="button" class="close btn btn-default btn-circle" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>  
+          </button>                            
+        </div>
+
+        <div class="modal-body" style="background-color: #F0F0F0">
+          <h3>Do you want to proceed?</h3>
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to 'Delete', @entry, :method => :delete, class: 'btn btn-outline-danger'%>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>                  
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script type="text/javascript">
+
+         jQuery(function($)
+        {
+            $('#tooltip_del').each(function() {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+
+          $('#foo').on('click', '.static-popup-link', function(){
+                  var options = {
+                    backdrop: "static", // Disables clicking away to close
+                    keyboard: false, // Disables the escape key
+                    show: true // This shows the modal by default
+                  };
+
+                  $("#myModal").modal(options);
+             });
+        });  
+</script>
+

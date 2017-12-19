@@ -1,0 +1,53 @@
+<div class="container" style="text-align: left">
+
+<%= form_for @entry, local: true do |f| %>
+  <% if entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="form-inline form-group text-center">
+    <div style="width: 150px; float: left;">
+        <h4><%= f.label :Name, class: 'col-md-6 col-md-offset-0' %></h4>
+    </div>  
+    <div class="input-group" style="float:left;width: 200px">  
+        <%= f.text_field :Name, id: :entry_Name , :placeholder => "Firstname Lastname", class: 'form-control'%>
+    </div> 
+  </div>
+</div>
+    
+  <div>
+    
+    <div id="phone_contacts">
+
+      <%= f.fields_for :phone_contacts do |contact| %>
+        <%= render 'phone_contacts/phone_contact_fields', f: contact %>
+      <% end %>
+
+      <div class="input-group-btn pull-left" style="position:relative;margin-top:20px;" id="add">
+        <%= link_to_add_association f, :phone_contacts, :partial => 'phone_contacts/phone_contact_fields', render_options: { wrapper: 'inline' }, class: "btn btn-info" do %>
+            <i class="test fa fa-phone"></i> Add PhoneNumber
+        <% end %>
+      </div>
+
+  </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="btn-group" id="submit" style="padding-left: 200px;position:relative;margin-top:20px;">
+      <%= button_tag(type: "submit", class: "btn btn-info") do %>
+          <i class="fa fa-save"></i> Save
+      <% end %>
+    </div>
+
+  <% end %>

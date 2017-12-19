@@ -1,0 +1,52 @@
+<div class='nested-fields' id="phone_attr">
+
+<% option= ['Work','Home','Cell'] %> 
+
+<hr>
+<div class="row">
+  <div class="form-inline form-group text-center">
+  <div style="text-align:left; width: 150px; float: left;margin-top:10px;">
+      <h4><%= f.label :Label , class: 'col-md-6 col-md-offset-0' %></h4>
+  </div>  
+  <div class="form-group" style="float:left;margin-top:10px;width: 150px" >
+      <%= f.select :Label, option, prompt: 'Select' , class: 'form-control' %>
+  </div>
+</div>
+  <div class="form-inline form-group text-center">
+    <div style="width: 150px; float: left;margin-top:10px;">
+      <h4> <%= f.label :Number, class: 'col-md-6 col-md-offset-0'  %></h4>
+    </div>  
+  <div class="input-group" style="float:left;margin-top:10px;", id="mask_phone"> 
+      <%= f.telephone_field :Number, id: 'phonenum', placeholder: "(999) 999-9999", class: 'form-control' %>
+  </div>
+    <div class="links pull-left" style="padding-left: 45px;position:relative;margin-top:10px;" id="test">
+    <%= link_to_remove_association f, class: "btn btn-default btn-circle" do  %>
+      <i id="tooltip2" data-toggle="tooltip" data-placement="right" data-original-title="Remove" class="fa fa-times" style="color: red;font-size: 24px;"></i> 
+    <% end %>
+  </div>
+  </div>
+</div>
+  
+
+
+</div>
+
+	<script> 
+
+    jQuery(function($)
+    {
+          $('#mask_phone > #phonenum').each(function() {
+              $( this ).mask("(999) 999-9999");
+            });
+
+          $('#tooltip2').each(function() {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+
+    });
+
+ 	</script>
+
+
+
+  
